@@ -1,0 +1,32 @@
+name: friky-land
+recipe: symfony
+config:
+  webroot: public
+
+services:
+  myservice:
+    type: mysql
+    portforward: true
+
+  phpmyadmin:
+    type: phpmyadmin
+
+  node:
+    type: node:20
+    build:
+      - npm install
+
+tooling:
+  npm:
+    service: node
+
+  node:
+    service: node
+
+#   appserver:
+#     type: node:20
+
+# tooling:
+#   yarn:
+#     service: appserver
+#     command: yarn

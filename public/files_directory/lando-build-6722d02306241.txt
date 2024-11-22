@@ -1,0 +1,22 @@
+# Initialize a symfony recipe
+mkdir symfony6-app
+
+cd symfony6-app 
+
+lando init --source cwd --recipe symfony --webroot public --name my-first-symfony-app
+
+# Install symfony
+lando composer create-project symfony/website-skeleton tmp && cp -r tmp/. . && rm -rf tmp
+
+# Install other Symfony dependencies you may like
+lando composer require annotations asset doctrine encore form logger maker profiler security security-guard stof/doctrine-extensions-bundle twig validator var-dumper
+
+# Start it up
+lando start
+
+# List information about this app.
+lando info
+
+# Run bin/console commands with: lando console
+# Here is how to clear cache; 
+lando console cache:clear

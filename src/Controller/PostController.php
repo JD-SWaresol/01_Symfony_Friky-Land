@@ -2,26 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Post;//Agregamos este encabezado
-use App\Entity\User;//Agregamos este encabezado
-use App\Form\PostType;//Agregamos este encabezado
-
-use Doctrine\ORM\EntityManagerInterface;//Agregamos este encabezado
+use App\Entity\Post;
+use App\Entity\User;
+use App\Form\PostType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;//Agregamos este encabezado
-use Symfony\Component\HttpFoundation\JsonResponse;//Agregamos este encabezado
-
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
-
-//use Symfony\Bridge\Doctrine\ArgumentResolver\EntityValueResolver
 use Symfony\Bridge\Doctrine\ArgumentResolver\EntityValueResolver;
-
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class PostController extends AbstractController
@@ -79,15 +73,8 @@ class PostController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        // $allAttributes = $request->attributes->all();
-
-        // Obtiene la informacion de los Metadatos -> Session\Storage\MetadataBag 
-        // $session_info = $session->getMetadataBag();
-
         // Obtiene la información sobre los atributos de seguridad '_security'
         $session_info = $session->all();
-        
-        
         
         // Guardamos el 'email' del array que contiene los atributos de seguridad
         $user_email = $session_info['_security.last_username'];
@@ -97,9 +84,6 @@ class PostController extends AbstractController
 
         // Extraemos el identificador del usuario
         $user_id = $query_user[0]['id'];
-
-
-
 
         // Instanciamos la entidad
         $post = new Post();
@@ -216,51 +200,4 @@ class PostController extends AbstractController
 
         return $this->redirectToRoute('index');
     }
-
-
-    // Agreamos un parametro, en este caso 'id'
-    // #[Route('/post/{id}', name: 'app_post')]
-    // public function index($id): Response
-    // {
-    //     //Muestra la info como si fuera un objeto
-    //     $post = $this->em->getRepository(Post::class)->find($id);
-
-    //     // muestra un listado de ciertas propiedades de elementos registrados
-    //     $custom_post = $this->em->getRepository(Post::class)->findPost($id);
-    //     return $this->render('post/index.html.twig', [
-    //         'post' => $post,
-    //         'custom_post' => $custom_post
-    //     ]);
-    // }
-
-
-    // #[Route('/insert/post', name: 'insert_post')]
-    // public function insert()
-    // {
-    //     $post = new Post('Mi nuevo Post Insertado', 'Opinion', 'Hola Mundo :3', 'holita.jpg', 'Hola de nuevo');
-    //     $user = $this->em->getRepository(User::class)->find(id: 1);
-    //     $post->setUser($user);
-
-    //     $this->em->persist($post);
-    //     $this->em->flush();// Escribe el nuevo registro dentro de la base de datos
-    //     return new JsonResponse(['success' => true]);
-    // }
-
-    // #[Route('/update/post', name: 'update_post')]
-    // public function update()
-    // {
-    //     $post = $this->em->getRepository(Post::class)->find(2);
-    //     $post->setTitle('Este es mni nuevo titulo');
-    //     $this->em->flush();// Escribe el nuevo registro dentro de la base de datos
-    //     return new JsonResponse(['success' => true]);
-    // }
-
-    // #[Route('/remove/post', name: 'delete_post')]
-    // public function remove()
-    // {
-    //     $post = $this->em->getRepository(Post::class)->find(3);
-    //     $this->em->remove($post);
-    //     $this->em->flush();// Escribe el nuevo registro dentro de la base de datos
-    //     return new JsonResponse(['success' => true]);
-    // }
 }

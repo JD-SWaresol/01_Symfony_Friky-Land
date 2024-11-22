@@ -67,13 +67,4 @@ class UserController extends AbstractController
         ]);
     }
 
-
-    // #[Route('/insert/user', name: 'insert_post')]
-    // public function insert()
-    // {
-    //     $user = new User('user.email', 'user.password', 'user.photo', 'user.description');
-    //     $this->em->persist($user);
-    //     $this->em->flush();// Escribe el nuevo registro dentro de la base de datos
-    //     return new JsonResponse(['success' => true]);
-    // }
 }

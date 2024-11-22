@@ -2,20 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\User;//Agregamos este encabezado
+use App\Entity\User;
 use App\Form\UserType;
-use Doctrine\ORM\EntityManagerInterface;//Agregamos este encabezado
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
 use Symfony\Component\PropertyAccess\PropertyAccess;
-
 use Symfony\Component\HttpFoundation\RequestStack;
-
 
 class LoginController extends AbstractController
 {
@@ -89,14 +85,4 @@ class LoginController extends AbstractController
             'error'         => $error
         ]);
     }
-
-    // #[Route('/logout', name: 'logout', methods: ['GET'])]
-    // public function logout(AuthenticationUtils $authenticationUtils): Response
-    // {
-    //     return $this->render('login/index.html.twig', [
-            
-    //     ]);
-
-    //     return $this->redirectToRoute('login');
-    // }
 }

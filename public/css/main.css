@@ -47,3 +47,46 @@ body {
     -moz-box-shadow: 6px 6px 11px -5px rgba(0,0,0,0.53);
     box-shadow: 6px 6px 11px -5px rgba(0,0,0,0.53);
 }
+
+/* Custom Styles */
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #fff;
+    border: ridge #ccc;
+    border-width: 4px;
+}
+
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    margin: 0 auto;
+}
+
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin: 0 auto;
+}

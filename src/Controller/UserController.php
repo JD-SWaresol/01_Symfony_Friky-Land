@@ -45,7 +45,7 @@ class UserController extends AbstractController
             $user->setPassword($hashedPassword);
 
             //Asignamos un rol para el usuario
-            $user->setRoles(['ROLE_ADMIN']);
+            $user->setRoles(['ROLE_USER']);
             $this->em->persist($user);
             $this->em->flush();
             return $this->redirectToRoute('userRegistration');
@@ -66,5 +66,10 @@ class UserController extends AbstractController
             'user' => $user
         ]);
     }
+
+    // #[Route('/registration', name: 'userRegistration')]
+    // public function userRegistrationFromAdmin(){
+
+    // }
 
 }

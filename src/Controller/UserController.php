@@ -8,8 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;//Agregamos este encabezado
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class UserController extends AbstractController
 {
@@ -19,7 +22,7 @@ class UserController extends AbstractController
     /**
      * @param $em
      */
-    public function __construct(EntityManagerInterface $em) 
+    public function __construct(EntityManagerInterface $em, private AccessDecisionManagerInterface $accessDecisionManager) 
     {
         $this->em = $em;
     }
@@ -67,9 +70,16 @@ class UserController extends AbstractController
         ]);
     }
 
-    // #[Route('/registration', name: 'userRegistration')]
-    // public function userRegistrationFromAdmin(){
+    #[Route('/usersList', name: 'usersList')]
+    public function getUsersList(TokenInterface $token){
 
-    // }
+        if ($this->accessDecisionManager->decide($token, ['ROLE_ADMIN'])) {
+            return $this->render('user/user-list.html.twig', []);
+        }
+
+        // Redireccionamos hacia index en caso de que el usuario no sea Admin
+        return $this->redirectToRoute('index');
+
+    }
 
 }

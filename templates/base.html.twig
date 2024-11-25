@@ -45,6 +45,10 @@
                                             </a>
                                         {%endif%}
 
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a href="{{ path('usersList') }}" class="dropdown-item"> System Users </a>
+                                        {% endif %}
+
                                         <a class="dropdown-item" href="{{ path('logout') }}">
                                             <i class="fa-solid fa-right-from-bracket"></i> Logout
                                         </a>

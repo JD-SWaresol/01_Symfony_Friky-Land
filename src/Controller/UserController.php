@@ -74,12 +74,20 @@ class UserController extends AbstractController
     public function getUsersList(TokenInterface $token){
 
         if ($this->accessDecisionManager->decide($token, ['ROLE_ADMIN'])) {
-            return $this->render('user/user-list.html.twig', []);
+
+            $users = new User();
+
+            $users = $this->em->getRepository(User::class)->findAll();
+
+            dump($users);
+
+            return $this->render('user/user-list.html.twig', [
+                'users' => $users
+            ]);
         }
 
         // Redireccionamos hacia index en caso de que el usuario no sea Admin
         return $this->redirectToRoute('index');
-
     }
 
 }

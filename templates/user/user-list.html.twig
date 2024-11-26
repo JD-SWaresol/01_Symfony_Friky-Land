@@ -8,10 +8,49 @@
 {% endblock %}
 
 {% block body %}
+    {{  parent() }}
     {# {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %} #}
 
     <h1>Esta seccion es para Administradores</h1>
+
+    <div class="">
+        {% for user in users %}
+            {% if user.photo == null %}
+                {% set first_row = 'col-md-12' %}
+                {% set first_row = 'd-none' %}
+            {% else %}
+                {% set first_row = 'col-md-9' %}
+                {% set second_row = 'col-md-3' %}
+            {% endif %}
+            <div class="container">
+                {% if user.email %}
+                    <div class="row border custom-shadow">
+                        <div class="{{ first_row }}">
+                            <div class="my-2 px-1 py-2">
+                                <h4>
+                                    <a href="{{ path('userProfile', {id: user.id}) }}">
+                                        {{ user.email }}
+                                    </a>
+                                </h4>
+                                <div>
+                                    {{ user.description }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="{{ second_row }} my-auto">
+                            {% if user.photo != null %}
+                                <img src="{{ asset('files_directory/' ~ user.photo) }}" alt="Not found"
+                                    width="100%">
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
     
 {% endblock %}
